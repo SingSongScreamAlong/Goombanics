@@ -1,0 +1,44 @@
+WBP_InMatchHUD (SPEC - create in Unreal Editor on Windows Phase 2)
+
+Asset Path
+- /Game/UI/WBP_InMatchHUD
+
+Parent Class (recommended)
+- UGoombanicsHUDWidget (existing C++ widget) OR a new UUserWidget with bindings to GameState/PlayerState getters.
+
+Primary Design Goal
+- Split-screen readability (1–4 players): compact, high contrast, big numbers.
+
+Required Bindings (Data Sources)
+- GameState (AGoombanicsGameState)
+  - MatchPhase
+  - TimeRemaining
+  - DestructionPercent
+  - bTotalledAchieved
+  - KaijuHealthPercent
+  - WeakPointStates (LeftLeg/RightLeg/Head)
+  - GetSortedScoreboard(MaxEntries, bIncludeAllLocals)
+- PlayerState (AGoombanicsPlayerState)
+  - TotalScore
+  - KaijuDamageDealt
+  - CollateralDamageScore
+  - WeakPointsDestroyed
+  - Deaths
+  - Role (Human/Kaiju)
+
+Display Rules
+- Timer: large, always visible.
+- Destruction meter: bar + percent text.
+- Kaiju health: bar + percent.
+- Weak points: 3 compact bars (color shift when destroyed).
+- Stagger indicator: large short-lived banner.
+- Scoreboard: Top-N list; always include local players even if not top.
+
+Layout Guidance
+- Keep HUD within safe zones for split-screen.
+- Avoid small labels; prefer icons + large numerics.
+- Use short text strings (e.g., "KAIJU", "CITY", "TIME").
+
+TODO(Phase2-Windows)
+- Bind to GameState delegates for reactive updates.
+- Add simple hit marker + weak-point indicator overlays.

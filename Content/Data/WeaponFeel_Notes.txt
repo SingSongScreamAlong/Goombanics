@@ -1,0 +1,28 @@
+GOOMBANICS: COLLATERAL DAMAGE
+WEAPON FEEL NOTES (WRITE-ONLY)
+
+Core Pillars
+- Powerful: players feel impact even without Chaos.
+- Silly: ragdoll launches, exaggerated impulses.
+- Readable: clear feedback layers for split-screen.
+
+Rifle Intent
+- "Constant pressure" tool.
+- Always feels usable.
+- Hit feedback is frequent but subtle.
+- Primary role: Kaiju DPS and weak point chip.
+
+Rocket Launcher Intent
+- "Comedy chaos" tool.
+- Slower cadence, huge payoff.
+- Environmental bias: encourages collateral + crowd-clearing.
+- Primary role: stagger setup moments and cinematic knockback.
+
+Tuning Philosophy
+- Use data assets so feel can be tuned live on Windows Phase 2.
+- Keep weapon logic modular so online scaling doesn’t require a rewrite.
+
+TODO(Phase2-Windows)
+- Create DA_WeaponTuning and iterate values in PIE.
+- Add camera shake assets and audio events per weapon.
+- Add optional per-weapon hit marker style.

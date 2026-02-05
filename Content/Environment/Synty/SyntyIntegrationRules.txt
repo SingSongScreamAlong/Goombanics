@@ -1,0 +1,49 @@
+GOOMBANICS: COLLATERAL DAMAGE
+SYNTY INTEGRATION RULES (WRITE-ONLY)
+
+Goals
+- Synty assets should drop in cleanly without rework.
+- Split-screen readability > prop density.
+- Destruction layered on later (logical now, Chaos for hero setpieces later).
+
+Folder Convention
+- Environment/Synty/Buildings: modular building shells, storefront facades, rooftops.
+- Environment/Synty/Roads: street pieces, intersections, sidewalks.
+- Environment/Synty/Props: vehicles, barriers, street furniture.
+- Environment/Synty/Decorations: signage, small detail meshes.
+
+Placement Rules (Split-Screen Friendly)
+- Prefer: large readable silhouettes and broad shapes.
+- Avoid: dense micro-prop clutter in the center combat zone.
+- Keep center plaza mostly clear (players need to track Kaiju limbs and tells).
+- Use props to create lanes and soft cover along edges, not in the middle.
+
+Destruction Clusters
+- Group buildings into "destruction clusters" (logical groups) so we can:
+  - mark a handful of props as breakables
+  - keep the bulk of the city static
+  - later convert select clusters to Chaos setpieces
+
+Breakables vs Static Forever
+- Candidates for ABreakableActor (logical):
+  - cars, vending machines, street lights, benches, mailboxes
+  - small walls / kiosks used as edge cover
+- Static forever:
+  - bulk building shells
+  - high-detail skyline / far LOD structures
+
+Chaos Setpieces (DEFERRED - Phase 2 Windows)
+- Only 2–3 hero setpieces per map.
+- Guidelines:
+  - must fire once
+  - must contribute DestructionValue once
+  - must auto-cleanup debris
+
+Nanite (DEFERRED)
+- Evaluate on Windows. Prefer Nanite only for:
+  - large static meshes with high triangle counts
+- Avoid Nanite on small props.
+
+TODO(Phase2-Windows)
+- Import Synty packs into Environment/Synty/*
+- Create map-level collections/instancing strategy if needed for performance.

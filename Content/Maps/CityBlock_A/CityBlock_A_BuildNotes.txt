@@ -1,0 +1,64 @@
+GOOMBANICS: COLLATERAL DAMAGE
+Map: CityBlock_A
+Engine: UE 5.5.x
+Mode: WRITE-ONLY authoring notes (map will be created/edited in Unreal Editor on Windows Phase 2)
+
+GOAL
+- A readable, split-screen-friendly city block arena for 1–4 players.
+- Central Kaiju combat zone with clear sightlines.
+- Hard edges to keep players in the arena (physical + visual).
+- Verticality that does NOT break cameras.
+
+INTENDED SCALE (UE units)
+- Unreal default scale: 1uu = 1cm.
+- Arena target footprint: ~120m x 120m (12,000uu x 12,000uu).
+- Primary combat square: ~60m x 60m.
+- Streets: 10–12m wide.
+- Sidewalks: 2–4m.
+- Building heights: 1–4 stories (avoid tall canyons that occlude cameras).
+
+SPATIAL LAYOUT (TOP-DOWN)
+- Central plaza/intersection = Kaiju primary engagement area.
+- 4 streets form a cross around the center.
+- Corner lots: 4 modular building shells that create boundaries.
+- Perimeter “soft funnel” props (parked cars, jersey barriers) to guide movement without clutter.
+
+ARENA EDGES / PLAYER CONTAINMENT
+- Use a combination of:
+  - Low walls (1–1.5m)
+  - Collidable planters
+  - Fence lines
+  - Gently sloped berms
+- Avoid invisible walls unless necessary.
+
+SPLIT-SCREEN SIGHTLINES
+- Keep the center readable from any street approach.
+- Avoid dense prop clutter in the middle.
+- Avoid tight indoor corridors (players should not need to enter buildings).
+
+VERTICALITY RULES
+- Preferred: ramps, stairs to small platforms (2–4m elevation).
+- Avoid: multi-floor interior navigation.
+- Kaiju should remain visible from most play space.
+
+SPAWNS
+- Kaiju spawn: center plaza, slightly offset to avoid immediate player spawn overlap.
+- Player spawns: 4 corner-adjacent zones, each with 2–3 PlayerStarts for variety.
+
+BREAKABLES / DESTRUCTION
+- Scatter breakables in clusters near edges and along streets.
+- Keep center mostly clear to reduce chaos noise for split-screen.
+
+CHAOS SETPIECES (DEFERRED)
+- Reserve 2–3 hero setpiece locations (Phase 2 Windows):
+  - Storefront wall facing the plaza
+  - Crane/gantry near one corner lot
+  - Parking garage corner chunk
+
+LIGHTING (DEFERRED)
+- Phase 2: choose either fully dynamic or baked; prioritize performance for 4-player split.
+
+TODO(Phase2-Windows)
+- Create CityBlock_A.umap in Unreal Editor.
+- Place: PlayerStarts, KaijuSpawn actor/tag, breakables, setpiece markers.
+- Verify: camera readability, split-screen performance, navmesh for Kaiju.

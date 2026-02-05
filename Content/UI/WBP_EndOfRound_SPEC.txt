@@ -1,0 +1,37 @@
+WBP_EndOfRound (SPEC - create in Unreal Editor on Windows Phase 2)
+
+Asset Path
+- /Game/UI/WBP_EndOfRound
+
+Primary Goal
+- Clear match result + funny awards + quick "press to restart".
+
+Required Bindings
+- GameState (AGoombanicsGameState)
+  - MatchEndReason
+  - Final scoreboard (GetSortedScoreboard)
+  - End-of-round awards struct (computed server-side)
+
+Display Rules
+- End reason headline (big):
+  - "KAIJU DEFEATED" / "CITY DESTROYED" / "TIME'S UP"
+- Scoreboard: sorted list.
+- Awards: 3–4 tiles, each with:
+  - Award title
+  - Winning player name
+  - Stat number
+
+Split-Screen Rules
+- End-of-round UI should be legible in 4-way split:
+  - big tiles
+  - minimal text
+  - high contrast
+
+Minimal Layout Guidance
+- Full-screen overlay per local player.
+- Center column: End reason + timer-to-restart.
+- Side column: Awards.
+
+TODO(Phase2-Windows)
+- Add input prompt per platform.
+- Add short celebratory audio stingers.

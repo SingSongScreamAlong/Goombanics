@@ -1,0 +1,32 @@
+GOOMBANICS: COLLATERAL DAMAGE
+Split-Screen Camera Constraints (WRITE-ONLY)
+
+Design Priorities
+- Readability > spectacle.
+- Maintain consistent camera behavior across 1–4 players.
+
+Camera Distance & Height (Target Ranges)
+- Third-person follow camera distance: ~350–500uu (3.5–5m)
+- Camera boom height: ~60–90uu
+
+FOV
+- Single player: 80–90 degrees
+- 2–4 players: 90–100 degrees if needed for situational awareness
+
+Vertical Obstruction Rules
+- Avoid overhead beams/awnings that cause frequent camera collision.
+- Avoid narrow alleys that force constant camera zoom-in.
+- Keep gameplay-critical areas outdoors and open.
+
+Level Layout Constraints
+- No tight indoor corridors.
+- Avoid tall building canyons in the central combat zone.
+- Keep the Kaiju visible from at least 2–3 major positions per quadrant.
+
+HUD Readability
+- Minimize small text.
+- Use icons, bars, and color coding.
+
+TODO(Phase2-Windows)
+- Validate with 4-player split: camera collision, FOV, occlusion.
+- Apply per-local-player UI scaling rules if needed.

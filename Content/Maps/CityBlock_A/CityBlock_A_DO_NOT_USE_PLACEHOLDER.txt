@@ -1,0 +1,11 @@
+DO NOT USE THIS AS A MAP.
+
+GOOMBANICS: COLLATERAL DAMAGE
+CityBlock_A placeholder marker (WRITE-ONLY on macOS)
+
+A real UE5 .umap is a binary asset and must be created in Unreal Editor.
+
+TODO(Phase2-Windows)
+- Create /Game/Maps/CityBlock_A/CityBlock_A.umap in-editor.
+- Build the arena following CityBlock_A_BuildNotes.txt.
+- Set GameDefaultMap/EditorStartupMap back to /Game/Maps/CityBlock_A once the real map exists.

@@ -1,0 +1,68 @@
+GOOMBANICS: COLLATERAL DAMAGE
+WINDOWS_PHASE2_TODO (WRITE-ONLY)
+
+Prereqs
+- Install Unreal Engine 5.5.x on Windows.
+- Ensure Visual Studio toolchain + UE prerequisites are installed.
+
+Build / Open Project
+- Open Goombanics.uproject in UE 5.5.x.
+- Generate project files if prompted.
+- Build C++ modules.
+- Resolve any include path / module dependency issues.
+
+Validate Core Loop (1–4 local split-screen)
+- Validate 1 player:
+  - Start match, time/death/destruction values update.
+  - HUD binds correctly to GameState/PlayerState getters.
+- Validate 2–4 local players:
+  - Correct viewport layout.
+  - Correct per-player HUD instances.
+  - Scoreboard includes all locals.
+  - Respawn flow works per controller.
+
+Content Minimums (v1 playable)
+- Add 1 Kaiju pawn (skeletal mesh placeholder ok) with:
+  - Health + weak point visualization.
+  - Stagger state visualization.
+- Add 2 weapons (minimum):
+  - Rifle
+  - Rocket launcher
+
+Chaos Destruction (2–3 setpieces)
+- Add 2–3 authored Chaos setpieces (NOT everywhere):
+  - Street facade collapse
+  - Fuel station / tank explosion
+  - Parking garage section break
+- Ensure setpieces feed into the destruction meter / scoring.
+
+Performance Profiling Checklist
+- Run stat passes in representative scenarios:
+  - 4-way split-screen with Kaiju + explosions + UI
+- Watch:
+  - Game thread time
+  - Render thread time
+  - GPU time
+  - Hitches / spikes (streaming, physics)
+- Validate scalability toggles:
+  - Niagara/VFX density
+  - shadow quality
+  - view distance
+  - physics sub-stepping (if used)
+
+Networking Spot-Checks (early)
+- Ensure authority boundaries are respected:
+  - Server-only match end
+  - Server-only possession decisions
+- Confirm replicated state reaches clients:
+  - match phase/time/destruction
+  - Kaiju health/weak points
+  - PlayerState stats
+
+Known Risks / Watch List
+- Split-screen HUD readability and safe-zone issues.
+- Possession swap edge cases (HUD refresh, stale pawn pointers, ability gating).
+- Chaos performance spikes and replication overhead.
+- Large physics objects causing unstable simulation.
+- Breakable reset between rounds (map reset/reload strategy).
+- Asset streaming hitches in 4-player scenarios.

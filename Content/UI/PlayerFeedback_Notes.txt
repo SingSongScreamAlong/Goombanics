@@ -1,0 +1,50 @@
+GOOMBANICS: COLLATERAL DAMAGE
+PLAYER FEEDBACK SYSTEM (DESIGN NOTES - WRITE-ONLY)
+
+Goal
+- Make every hit feel readable and satisfying in 1–4 player split-screen.
+- Feedback must be layered so players understand:
+  - Did I hit?
+  - Did I hit the Kaiju vs the environment?
+  - Did I hit a weak point?
+  - Did that matter?
+
+Hit Confirmation Layers
+1) Hit Marker (UI)
+- Small, high-contrast cross/shape at center.
+- Different marker for:
+  - Kaiju body
+  - Kaiju weak point
+  - Breakable/environment
+- Duration: very short (<= 120ms) so it doesn’t clutter.
+
+2) Damage Numbers (UI)
+- Optional, minimal. Prefer “burst” numbers only on:
+  - Weak point hits
+  - Final blow
+  - Stagger window head bonus
+- Keep font large enough for split-screen.
+
+3) Audio Intent
+- Distinct layers:
+  - Kaiju flesh/armor impact
+  - Weak point critical ping (higher pitch)
+  - Breakable crunch / shatter
+  - Rocket explosion: comedic + bassy
+- Avoid overwhelming mix; prioritize Kaiju telegraph audio.
+
+4) Camera Feedback
+- Weapon recoil:
+  - Rifle: subtle per-shot kick
+  - Rocket: slow heavy kick + big shake
+- Kaiju stagger:
+  - larger shake / rumble for all players (but very brief)
+
+5) Screen Feedback
+- Micro color flash on weak point hit (short, readable).
+- On stagger: brief vignette or desat pulse (optional).
+
+Deferred (Phase2-Windows)
+- Implement actual UMG widgets + animations.
+- Add camera shakes, audio cues, and controller rumble.
+- Tune for readability via PIE split-screen.

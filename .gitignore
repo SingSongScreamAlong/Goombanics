@@ -1,0 +1,42 @@
+# Unreal Engine generated files
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+
+# IDE files
+.vs/
+.vscode/
+*.xcworkspace/
+*.xcodeproj/
+
+# Build files
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# macOS
+.DS_Store
+*.dSYM/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Compiled files
+*.pdb
+*.obj
+*.lib
+*.dll
+*.exe
+*.dylib
+*.so
+
+# Crash reports
+CrashReportClient/
+
+# Local user settings
+*.DotSettings.user

@@ -1,0 +1,44 @@
+GOOMBANICS: COLLATERAL DAMAGE
+OPEN KAIJU POSSESSION - NETWORKING NOTES (WRITE-ONLY)
+
+Scope
+- One player can openly possess/control the Kaiju pawn.
+- UI and scoreboard may indicate Kaiju player explicitly.
+
+Authoritative Possession
+- Server must be the sole authority that calls Possess/UnPossess.
+- Clients request via RPC; server validates and executes possession.
+
+Role vs Possession
+- Treat role (EGoombanicsRole) as a high-level UI/score label.
+- Treat possession as the actual gameplay control state.
+- Invariants:
+  - If a PlayerController possesses KaijuPawn, its PlayerState Role should be Kaiju.
+  - If it possesses a HumanCharacter, Role should be Human.
+
+Replication
+- Possession itself replicates via AController/Pawn replication.
+- Ensure Kaiju health / weak points / stagger state are replicated (or derived from replicated state).
+- Ensure the scoreboard uses PlayerState replicated stats.
+
+Join In Progress
+- New clients must see:
+  - Who is controlling the Kaiju
+  - Current Kaiju health + weak points
+  - Current destruction percent and match phase
+
+Disconnect / Reconnect
+- If Kaiju player disconnects:
+  - Option A: server hands Kaiju back to AI (recommended initial).
+  - Option B: server selects a new Kaiju player and swaps possession.
+
+Mid-Match Possession Swap
+- If enabled by variant:
+  - Server selects next controller.
+  - Ensure weak point state remains on the Kaiju pawn and is not reset.
+  - Ensure HUD refresh triggers on the new owning client.
+
+TODO(Phase2-Windows)
+- Add server RPC endpoints for requesting Kaiju possession.
+- Add server-side validation rules (cooldowns, eligibility, anti-grief).
+- Load UGoombanicsMatchVariantDataAsset and apply rules.

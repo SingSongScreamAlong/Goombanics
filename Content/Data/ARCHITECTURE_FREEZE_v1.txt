@@ -1,0 +1,56 @@
+GOOMBANICS: COLLATERAL DAMAGE
+ARCHITECTURE_FREEZE_v1 (WRITE-ONLY)
+
+Purpose
+- Freeze the Phase 1 architecture assumptions so Phase 2 work (Windows build, Chaos, content authoring) happens without reshaping the foundation.
+
+Core Invariants (MUST NOT BREAK)
+1) Pawn owns gameplay state + rules for itself
+- Health, weak points, stagger state, weapon ownership/attachment, and destruction interactions live on the Pawn/Actor that is being interacted with.
+- Monster/Kaiju behavior must function the same whether possessed by AI or a player.
+
+2) Controller owns input + decision making
+- PlayerController: input mapping, camera/HUD ownership, and possession transitions.
+- AIController: AI decision making.
+- Controllers do not own authoritative gameplay state that must persist across possession swaps.
+
+3) GameMode = rules (server-only)
+- Match rules, authoritative spawning, authoritative possession decisions, and match end conditions.
+- Never read GameMode directly from client UI.
+
+4) GameState = replicated match state
+- Match phase, time remaining, destruction percent, match end reason, end-of-round awards.
+- Provide Blueprint-friendly getters for UI.
+
+5) PlayerState = identity + score
+- Player identity and replicated score/stat tracking.
+- Role is a label for UI/scoring context; possession is the actual control state.
+
+6) Kaiju is explicit and possession-based
+- The Kaiju is a real pawn that exists in-world.
+- Player-controlled Kaiju is implemented via possession of the Kaiju pawn.
+
+Non-Goals for v1 (EXPLICIT)
+- No ranked/competitive matchmaking.
+- No advanced anti-cheat.
+- No complex class/hero loadouts.
+- No multi-round campaign meta-progression.
+- No dynamic “mystery role” mechanics.
+- No full-featured destruction simulation everywhere (Chaos used only for setpieces initially).
+
+Frozen Now (DO NOT CHANGE IN PHASE 2)
+- Responsibility boundaries above (Pawn/Controller/GameMode/GameState/PlayerState).
+- Possession-driven Kaiju control model.
+- Network authority model: server owns match flow and possession.
+- UI binding approach: read replicated state from GameState/PlayerState and the currently possessed pawn.
+
+Allowed to Change Later (FUTURE-FLEX)
+- Exact weapon tuning values and score weights.
+- Specific award types and thresholds.
+- Match variants and their tuning DataAssets.
+- UI layout/art, as long as data sources remain consistent.
+- Whether Kaiju starts AI-controlled before a player takes over (variant-driven).
+
+Phase 2 Integration Reminder
+- Create DataAssets in Content and wire them into GameMode/GameState on Windows.
+- Validate split-screen and replication before adding more complexity.

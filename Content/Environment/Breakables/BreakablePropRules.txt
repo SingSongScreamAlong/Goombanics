@@ -1,0 +1,30 @@
+GOOMBANICS: COLLATERAL DAMAGE
+Breakable Prop Rules (WRITE-ONLY)
+
+Blueprint Stub
+- BP_BreakableProp (derived from ABreakableActor)
+
+Mesh Assignment Rules
+- Use StaticMeshComponent as the intact visual.
+- Optional: BrokenMesh for replacement.
+- If no BrokenMesh is provided, hide/disable collision on break.
+
+DestructionValue Ranges (Guidelines)
+- Small props (mailbox, bench, street sign): 10–40
+- Medium props (parked car, kiosk, vending machine): 50–200
+- Large props (small storefront awning, concrete barrier cluster): 250–600
+
+Visual Replacement Strategy
+- Phase 1: mesh swap or hide (logical only).
+- Optional: spawn simple particle/dust FX (deferred).
+
+Chaos Replacement (DEFERRED)
+- TODO(Phase2-Windows): Create Geometry Collection variants for select hero breakables.
+- Do NOT convert all breakables to Chaos.
+
+Scoring / Match Flow
+- Break() should call into GameState once (idempotent).
+
+TODO(Phase2-Windows)
+- Create BP_BreakableProp asset in /Content/Environment/Breakables/.
+- Set default DestructionValue by size category.

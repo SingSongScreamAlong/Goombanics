@@ -1,0 +1,30 @@
+GOOMBANICS: COLLATERAL DAMAGE
+DESTRUCTION vs KAIJU DAMAGE (DESIGN NOTES - WRITE-ONLY)
+
+Two parallel goals exist in every match:
+1) Kill the Kaiju (direct combat damage)
+2) Survive/limit city destruction (or embrace chaos for score, depending on mode)
+
+Player Choice Tension
+- Players constantly choose:
+  - Focus fire weak points to stagger and finish
+  - Cause chaos to score collateral / create space
+
+Weapon Bias
+- Rifle:
+  - Bias toward Kaiju DPS
+  - Weak point chip damage
+  - Low collateral impact
+- Rocket Launcher:
+  - Bias toward collateral/destruction
+  - Knockback/comedy
+  - Can still help Kaiju via stagger setup and head window bursts
+
+Scoring Multipliers (Deferred)
+- TODO(Phase2-Windows): Add score multipliers for:
+  - Weak point destruction during stagger
+  - Collateral chains (multi-break within a short window)
+  - Risk proximity bonus (close-range leg shots)
+
+Chaos (Deferred)
+- Chaos setpieces contribute DestructionValue once; the spectacle should not dominate readability.

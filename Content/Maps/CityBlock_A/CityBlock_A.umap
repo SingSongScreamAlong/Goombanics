@@ -1,0 +1,10 @@
+DO NOT USE.
+
+This file is NOT a valid UE .umap and exists only because assets cannot be authored
+in write-only mode on macOS.
+
+ACTION REQUIRED (manual): delete this file before/when creating the real map.
+
+TODO(Phase2-Windows):
+- Create the real /Game/Maps/CityBlock_A/CityBlock_A.umap in Unreal Editor.
+- Replace this file entirely.

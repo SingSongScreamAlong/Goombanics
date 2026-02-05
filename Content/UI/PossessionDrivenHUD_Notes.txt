@@ -1,0 +1,42 @@
+GOOMBANICS: COLLATERAL DAMAGE
+POSSESSION-DRIVEN HUD NOTES (WRITE-ONLY)
+
+Goal
+- UI must adapt based on what the local PlayerController is currently possessing.
+- Kaiju control is explicit: if you are possessing the Kaiju, your UI should look and feel Kaiju.
+
+Core Rule
+- HUD is driven by (OwningPlayerController -> GetPawn()) and/or a small interface on the possessed pawn.
+
+Recommended Pattern (Phase2-Windows)
+- Define a lightweight BlueprintNativeEvent interface (or C++ base class API) on pawns:
+  - GetGoombanicsHUDMode() -> Human / Kaiju / Spectator
+  - GetGoombanicsHUDData() -> struct with the common fields needed by widgets
+- When possession changes:
+  - APlayerController::OnPossess / OnUnPossess triggers HUD refresh.
+  - HUD swaps or reconfigures widgets.
+
+Split-Screen
+- Each local player gets their own HUD instance.
+- Each HUD instance binds to its owning controller + currently possessed pawn.
+
+Suggested UI Differences
+- Human-controlled pawn:
+  - Weapon/ammo block
+  - Crosshair + hit marker
+  - Personal score + team context
+- Kaiju-controlled pawn:
+  - Weak point state emphasis
+  - Stomp/roar cooldowns (future)
+  - Collateral focus meters (optional)
+- Spectator:
+  - Minimal scoreboard + freecam info
+
+Networking Notes
+- Server is authoritative for possession.
+- Clients should rely on replicated possession state (PlayerController->Pawn) and replicated GameState values.
+
+TODO(Phase2-Windows)
+- Implement possession-driven HUD refresh events.
+- Add a Kaiju-specific HUD layout (even if minimal at first).
+- Validate 1–4 local players with mid-match possession swaps.

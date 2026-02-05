@@ -1,0 +1,38 @@
+GOOMBANICS: COLLATERAL DAMAGE
+CityBlock_A - Kaiju Arena Design Notes (WRITE-ONLY)
+
+High-level Intent
+- A compact "city block" arena where the Kaiju is always within visual context.
+- Players can flank and reposition without losing the Kaiju due to camera occlusion.
+
+Kaiju Spawn
+- Primary spawn point: Center Plaza
+- Spawn orientation: facing down the longest sightline.
+- Spawn clearance: keep a ~12m radius clear of dense props to avoid early physics/overlap issues.
+
+Player Respawn Zones
+- 4 respawn zones near the corners of the arena footprint.
+- Each zone should have:
+  - 2–3 PlayerStarts
+  - immediate cover (low walls/planters)
+  - a clear lane to the center within 2 seconds of sprinting
+- Avoid respawns that face directly into Kaiju stomp range.
+
+Weak Point Interaction Distances (Readability)
+- Leg weak points should be targetable at 8–25m.
+- Head weak point should be targetable at 15–40m during stagger.
+- Keep overhead obstruction minimal so players can look up without camera clipping.
+
+Stagger Windows Communication
+- In-world readability first:
+  - Kaiju posture change and/or VFX pulses
+  - a distinct audio sting
+- HUD assistance:
+  - stagger indicator + head weakpoint highlight
+
+No AI tuning in this phase.
+
+TODO(Phase2-Windows)
+- Place KaijuSpawn tagged actor in CityBlock_A.umap.
+- Place volume-based safe spawn zones and test with 4-way split.
+- Add simple in-world cues for stagger window (lightweight VFX).

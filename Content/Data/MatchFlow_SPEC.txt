@@ -1,0 +1,43 @@
+GOOMBANICS: COLLATERAL DAMAGE
+MATCH FLOW SPEC (WRITE-ONLY)
+
+Phases
+1) Warmup
+- Duration: WarmupDuration
+- Player join/spawn allowed
+- Kaiju spawns near end of warmup or at start of InProgress
+
+2) InProgress
+- Duration: MatchDuration
+- Scoring active
+- Destruction meter active
+
+3) PostRound
+- Freeze combat
+- Show End-of-Round UI
+- Optionally delay before restart
+
+End Conditions (authoritative on server)
+- Kaiju defeated (Kaiju health <= 0)
+- City destroyed (DestructionPercent >= 100)
+- Timer expired (TimeRemaining <= 0)
+
+Round Reset
+- Reset:
+  - MatchPhase
+  - TimeRemaining
+  - DestructionPercent + CurrentDestructionValue
+  - Kaiju health + weak points
+  - Active breakables (map reset/reload)
+- Persist:
+  - Player identities
+  - (Future) multi-round cumulative score (optional)
+
+Scoring
+- Score is data-driven via ScoreWeights.
+- TODO(Phase2-Windows): Add score multipliers (stagger window, collateral chains).
+
+TODO(Phase2-Windows)
+- Wire GameMode->GameState transitions.
+- Ensure match end is idempotent (no double end).
+- Validate in 1–4 local split-screen and later online.

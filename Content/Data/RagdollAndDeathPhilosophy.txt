@@ -1,0 +1,27 @@
+GOOMBANICS: COLLATERAL DAMAGE
+RAGDOLL + DEATH PHILOSOPHY (DESIGN NOTES - WRITE-ONLY)
+
+Core Philosophy
+- Death is expected.
+- Death is funny.
+- Death should not feel punishing.
+
+Rules
+- Time-to-respawn is short.
+- Score penalties are minimal (or none).
+- A death should be a story beat: players laugh and immediately re-engage.
+
+Ragdoll Exaggeration
+- Launch strength can be exaggerated beyond realism.
+- Direction should be readable (away from explosion / Kaiju swipe).
+- Avoid instant ragdoll spam; keep it tied to big events (rocket, stomp, sweep).
+
+Post-death Camera
+- Very short linger on the chaos (<= 0.5s) then respawn.
+- Prefer cinematic moments only on:
+  - Kaiju stomp multi-kill
+  - Big rocket chain reaction
+
+Chaos Hook (Deferred)
+- TODO(Phase2-Windows): Use Chaos impulses on ragdoll bodies for comedy launches.
+- TODO: Cap impulses / add sleep to prevent physics storms in 4-player split-screen.

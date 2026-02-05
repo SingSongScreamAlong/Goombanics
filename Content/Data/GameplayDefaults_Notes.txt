@@ -1,0 +1,28 @@
+GOOMBANICS: COLLATERAL DAMAGE
+Gameplay Defaults - Notes (WRITE-ONLY)
+
+This file documents placeholder gameplay defaults.
+Real values will live in DataAssets (Phase 2 Windows) once the editor can be used.
+
+Match Defaults
+- WarmupDuration: 5.0s
+- MatchDuration: 180.0s
+- RespawnDelay: 4.0s
+
+Destruction Meter
+- TotalDestructionValue (per map): 10,000
+- CityDestroyed threshold: 100%
+
+Scoring Weights (initial placeholders)
+- KaijuDamageWeight: 1.0
+- CollateralDamageWeight: 0.5
+- WeakPointDestroyedBonus: 500
+- FinalBlowBonus: 1000
+- DeathPenalty: 100
+
+TODO(Phase2-Windows)
+- Create DataAssets:
+  - DA_MatchDefaults
+  - DA_ScoringWeights
+  - DA_RespawnSettings
+- Connect GameMode/GameState to read these assets (data-driven).

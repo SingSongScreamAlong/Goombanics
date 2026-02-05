@@ -1,0 +1,34 @@
+BP_BreakableProp (STUB - create in Unreal Editor on Windows Phase 2)
+
+Asset Path
+- /Game/Environment/Breakables/BP_BreakableProp
+
+Parent Class
+- AGoombanicsBreakableActor (C++)
+
+Components
+- MeshComponent (StaticMeshComponent)
+  - Assign Intact Mesh (Synty prop mesh)
+
+Defaults
+- DestructionValue:
+  - Small: 10–40
+  - Medium: 50–200
+  - Large: 250–600
+- bContributesToDestructionMeter = true
+- BrokenMesh (optional): set if you have a "wrecked" version
+
+Behavior
+- Break() is called by:
+  - Weapon projectile splash
+  - Hitscan impact logic
+  - Kaiju stomp/sweep area damage (later)
+
+Visual Strategy (Phase 1)
+- If BrokenMesh is set: swap mesh
+- Else: hide actor + disable collision
+
+TODO(Phase2-Windows)
+- Replace select large props with Chaos Geometry Collection variants (hero setpieces only).
+- Add optional Niagara dust burst on break.
+- Add audio event and camera shake scaling by DestructionValue.

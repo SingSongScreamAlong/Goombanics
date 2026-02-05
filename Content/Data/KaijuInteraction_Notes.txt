@@ -1,0 +1,31 @@
+GOOMBANICS: COLLATERAL DAMAGE
+KAIJU ↔ PLAYER INTERACTION (DESIGN NOTES - WRITE-ONLY)
+
+Player Perception Goals
+- Massive: everything about the Kaiju implies scale.
+- Unfair at first: first contact is scary and disorienting.
+- Beat-able through coordination: players learn patterns through failure.
+
+Weak Points
+- Legs:
+  - Commitment and risk (close range)
+  - Destroy both legs to earn stagger
+- Head:
+  - Reward window (stagger-only bonus damage)
+
+Telegraphing (Readability)
+- Every Kaiju attack should have:
+  - A clear wind-up pose
+  - An audio cue
+  - A predictable impact zone
+- Players should be able to learn timing even while dying.
+
+Stagger Readability
+- Must be unmissable:
+  - posture collapse + dust burst
+  - distinct sound
+  - HUD indicator
+
+Deferred (Phase2-Windows)
+- Animation tuning, montage timing, VFX, audio.
+- Ensure stagger windows feel generous but earned.
