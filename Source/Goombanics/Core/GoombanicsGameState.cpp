@@ -4,7 +4,7 @@
 #include "Goombanics/Player/GoombanicsPlayerState.h"
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/PlayerController.h"
- #include "Templates/NumericLimits.h"
+#include "Templates/NumericLimits.h"
 
 AGoombanicsGameState::AGoombanicsGameState()
 {

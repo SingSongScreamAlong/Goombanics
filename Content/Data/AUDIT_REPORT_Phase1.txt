@@ -1,0 +1,205 @@
+GOOMBANICS: COLLATERAL DAMAGE
+PHASE 1 AUDIT REPORT
+Generated: 2026-02-06
+
+================================================================================
+1. FILE INVENTORY (82 files committed, 56 non-.gitkeep files)
+================================================================================
+
+PROJECT ROOT
+  .gitignore                          OK
+  Goombanics.uproject                 OK - targets UE 5.5
+  README.md                           OK - comprehensive, accurate
+
+CONFIG (4 files)
+  DefaultEditor.ini                   OK (empty/default)
+  DefaultEngine.ini                   OK - GameMode, collision profile, physics, DX12
+  DefaultGame.ini                     OK - MaxPlayers=12, project metadata
+  DefaultInput.ini                    OK - Enhanced Input, gamepad dead zones
+
+SOURCE - BUILD (3 files)
+  Goombanics.Target.cs                OK - V5 build settings, UE 5.5 include order
+  GoombanicsEditor.Target.cs          OK - matches game target
+  Goombanics.Build.cs                 BUG - see section 2
+
+SOURCE - MODULE ROOT (2 files)
+  Goombanics.h                        OK - log category declaration
+  Goombanics.cpp                      OK - module implementation + log category
+
+SOURCE - CORE (7 files)
+  GoombanicsTypes.h                   OK - enums, structs, delegates, score calc
+  GoombanicsGameMode.h                OK
+  GoombanicsGameMode.cpp              OK - full match flow implementation
+  GoombanicsGameState.h               OK - replicated state + UI getters
+  GoombanicsGameState.cpp             OK - awards, scoreboard, destruction, replication
+  GoombanicsLocalPlayerSubsystem.h    OK
+  GoombanicsLocalPlayerSubsystem.cpp  OK - Enhanced Input setup per local player
+
+SOURCE - PLAYER (4 files)
+  GoombanicsCharacter.h               OK - input actions, dash, weapon component
+  GoombanicsCharacter.cpp             OK - full movement, dash, fire, death
+  GoombanicsPlayerState.h             OK - role + score replication
+  GoombanicsPlayerState.cpp           OK
+
+SOURCE - MONSTER (5 files)
+  GoombanicsMonsterInterface.h        OK - BlueprintNativeEvent interface
+  GoombanicsMonsterBase.h             OK
+  GoombanicsMonsterBase.cpp           OK - weak points, stagger, damage, death
+  GoombanicsKaijuPawn.h               OK - AI states, attacks, hitboxes
+  GoombanicsKaijuPawn.cpp             OK - AI loop, stomp/sweep, destructible damage
+
+SOURCE - WEAPONS (12 files)
+  GoombanicsWeaponComponent.h         OK - fire modes, weapon stats, delegates
+  GoombanicsWeaponComponent.cpp       BUG - see section 2
+  GoombanicsProjectile.h              OK
+  GoombanicsProjectile.cpp            OK - splash damage, collision
+  GoombanicsWeaponTuning.h            OK - tuning struct + DataAsset
+  GoombanicsWeaponTuning.cpp          OK
+  GoombanicsBaseWeapon.h              OK
+  GoombanicsBaseWeapon.cpp            OK
+  GoombanicsRifleWeapon.h             OK
+  GoombanicsRifleWeapon.cpp           OK
+  GoombanicsRocketLauncherWeapon.h    OK
+  GoombanicsRocketLauncherWeapon.cpp  OK
+
+SOURCE - DESTRUCTION (2 files)
+  GoombanicsBreakableActor.h          OK
+  GoombanicsBreakableActor.cpp        OK - mesh swap, destruction meter feed
+
+SOURCE - UI (4 files)
+  GoombanicsHUD.h                     OK
+  GoombanicsHUD.cpp                   OK - widget creation + end-of-round
+  GoombanicsHUDWidget.h               OK - BindWidget properties
+  GoombanicsHUDWidget.cpp             OK - full GameState binding + update loop
+
+SOURCE - DATA (3 files)
+  GoombanicsGameplayTuningData.h      OK - match/respawn/kaiju/score DataAssets
+  GoombanicsGameplayTuningData.cpp    OK
+  GoombanicsMatchVariantData.h        OK - open Kaiju possession variant
+
+CONTENT - DOCS (17 text files)
+  All present and reviewed. No secret/deception/hidden references remain.
+
+================================================================================
+2. COMPILE-BLOCKING BUGS (must fix before Windows build)
+================================================================================
+
+BUG #1: ENUM NAME MISMATCH (COMPILE BLOCKER) -- FIXED
+  File: Source/Goombanics/Weapons/GoombanicsWeaponComponent.cpp, lines 23, 33, 161
+  Issue: Used "EWeaponFireMode" but enum is declared as "EGoombanicsFireMode".
+  Status: FIXED in this audit pass.
+
+BUG #2: LEADING WHITESPACE IN Build.cs -- FIXED
+  File: Source/Goombanics/Goombanics.Build.cs, line 4
+  Issue: " using System.IO;" had a leading space.
+  Status: FIXED in this audit pass.
+
+BUG #3: LEADING WHITESPACE IN GameState.cpp -- FIXED
+  File: Source/Goombanics/Core/GoombanicsGameState.cpp, line 7
+  Issue: " #include" had a leading space.
+  Status: FIXED in this audit pass.
+
+BUG #4: DEPRECATED ENUM STILL PRESENT (non-blocking)
+  File: Source/Goombanics/Core/GoombanicsTypes.h, lines 39-46
+  Issue: EGoombanicsPlayerRole is marked deprecated but still used by
+         PlayerState deprecated wrappers. Not a blocker but adds dead weight.
+  Risk: Low. Deprecated wrappers are functional. Can remove in Phase 2.
+
+BUG #5: PLACEHOLDER .umap FILE (manual action required)
+  File: Content/Maps/CityBlock_A/CityBlock_A.umap
+  Issue: This was written as a text placeholder, not a valid binary .umap.
+         UE editor will fail to load it.
+  Fix: Delete this file manually on Windows before opening the project.
+  Note: CityBlock_A_DO_NOT_USE_PLACEHOLDER.txt already documents this.
+
+================================================================================
+3. ARCHITECTURE STATUS
+================================================================================
+
+SYSTEM                  STATUS      NOTES
+--------------------    ----------  ------------------------------------------
+Module / Build          DONE        Build.cs, Target.cs, .uproject all present
+Game Mode               DONE        Full match flow: warmup -> in-progress -> post-round
+Game State              DONE        Full replication, UI getters, awards, scoreboard
+Player State            DONE        Role + score replication, all stat methods
+Player Character        DONE        Movement, dash, input, weapon, death/respawn
+Monster Interface       DONE        BlueprintNativeEvent interface
+Monster Base            DONE        Weak points, stagger, damage, possession hooks
+Kaiju Pawn              DONE        AI states, stomp/sweep attacks, destructible damage
+Weapon Component        DONE        Hitscan + projectile, ammo, reload, delegates
+Projectile              DONE        Splash damage, collision, lifespan
+Weapon Tuning           DONE        DataAsset stubs for data-driven tuning
+Base/Rifle/Rocket       DONE        Weapon class stubs with default values
+Breakable Actor         DONE        Mesh swap, destruction meter integration
+HUD Class               DONE        Widget creation, show/hide, end-of-round
+HUD Widget              DONE        Full GameState binding, all update methods
+Local Player Subsystem  DONE        Enhanced Input per local player
+Gameplay Tuning Data    DONE        Match/Respawn/Kaiju/Score DataAsset stubs
+Match Variant Data      DONE        Open Kaiju possession variant
+Role Assignment API     DONE        GameMode SetPlayerRole/GetPlayerRole
+Config Files            DONE        Engine, Game, Input, Editor
+README                  DONE        Comprehensive with setup instructions
+
+DESIGN DOCS             STATUS
+--------------------    ----------
+Architecture Freeze     DONE        Content/Data/ARCHITECTURE_FREEZE_v1.txt
+Windows Phase 2 TODO    DONE        Content/Data/WINDOWS_PHASE2_TODO.txt
+Match Flow Spec         DONE        Content/Data/MatchFlow_SPEC.txt
+HUD Spec                DONE        Content/UI/WBP_InMatchHUD_SPEC.txt
+End-of-Round Spec       DONE        Content/UI/WBP_EndOfRound_SPEC.txt
+Possession HUD Notes    DONE        Content/UI/PossessionDrivenHUD_Notes.txt
+Networking Notes        DONE        Content/Data/OpenKaijuPossession_NetworkingNotes.txt
+Split-Screen Camera     DONE        Content/UI/SplitScreenCameraConstraints.txt
+Player Feedback         DONE        Content/UI/PlayerFeedback_Notes.txt
+Weapon Feel             DONE        Content/Data/WeaponFeel_Notes.txt
+Kaiju Interaction       DONE        Content/Data/KaijuInteraction_Notes.txt
+Ragdoll/Death           DONE        Content/Data/RagdollAndDeathPhilosophy.txt
+Destruction vs Damage   DONE        Content/Data/DestructionVsDamage_Notes.txt
+Gameplay Defaults       DONE        Content/Data/GameplayDefaults_Notes.txt
+Breakable Prop Rules    DONE        Content/Environment/Breakables/BreakablePropRules.txt
+Synty Integration       DONE        Content/Environment/Synty/SyntyIntegrationRules.txt
+CityBlock_A Build       DONE        Content/Maps/CityBlock_A/CityBlock_A_BuildNotes.txt
+Kaiju Arena Design      DONE        Content/Maps/CityBlock_A/KaijuArenaDesignNotes.txt
+
+================================================================================
+4. SANITY CHECK RESULTS
+================================================================================
+
+Secret/deception/hidden Kaiju references:  NONE FOUND (clean)
+TODO(SecretKaiju) references:              NONE FOUND (all replaced)
+Kaiju possession model:                    Consistent (open, explicit, possession-based)
+Role enum:                                 Human/Kaiju/Spectator (correct)
+
+================================================================================
+5. WHAT IS NOT YET BUILDABLE (requires Windows / UE Editor)
+================================================================================
+
+- Blueprint assets (Character BP, Kaiju BP, GameMode BP, HUD Widget BP)
+- Input Mapping Context + Input Action assets
+- Map (CityBlock_A must be created in-editor)
+- DataAsset instances (weapon tuning, match defaults, etc.)
+- Chaos Geometry Collections
+- Skeletal/Static meshes
+- Materials, VFX, audio
+
+================================================================================
+6. LINE COUNTS BY SYSTEM
+================================================================================
+
+Core (Types + GameMode + GameState + Subsystem):  ~860 lines
+Player (Character + PlayerState):                 ~437 lines
+Monster (Interface + Base + Kaiju):               ~524 lines
+Weapons (Component + Projectile + Tuning + Stubs):~710 lines
+Destruction (BreakableActor):                     ~123 lines
+UI (HUD + Widget):                                ~353 lines
+Data (Tuning + Variant):                          ~165 lines
+Build/Config/Module:                              ~185 lines
+Design Docs:                                      ~600+ lines
+README:                                           ~220 lines
+
+TOTAL C++ (approx):                               ~3,170 lines
+TOTAL with docs/config:                           ~4,175 lines
+
+================================================================================
+END OF AUDIT
+================================================================================

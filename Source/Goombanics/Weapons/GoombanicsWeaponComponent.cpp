@@ -20,7 +20,7 @@ UGoombanicsWeaponComponent::UGoombanicsWeaponComponent()
 
 	FGoombanicsWeaponStats AssaultRifle;
 	AssaultRifle.WeaponName = FName("Assault Rifle");
-	AssaultRifle.FireMode = EWeaponFireMode::Hitscan;
+	AssaultRifle.FireMode = EGoombanicsFireMode::Hitscan;
 	AssaultRifle.Damage = 25.0f;
 	AssaultRifle.FireRate = 10.0f;
 	AssaultRifle.Range = 10000.0f;
@@ -30,7 +30,7 @@ UGoombanicsWeaponComponent::UGoombanicsWeaponComponent()
 
 	FGoombanicsWeaponStats RocketLauncher;
 	RocketLauncher.WeaponName = FName("Rocket Launcher");
-	RocketLauncher.FireMode = EWeaponFireMode::Projectile;
+	RocketLauncher.FireMode = EGoombanicsFireMode::Projectile;
 	RocketLauncher.Damage = 100.0f;
 	RocketLauncher.FireRate = 1.0f;
 	RocketLauncher.Range = 15000.0f;
@@ -158,7 +158,7 @@ void UGoombanicsWeaponComponent::Fire()
 
 	const FGoombanicsWeaponStats& Stats = Weapons[CurrentWeaponIndex];
 
-	if (Stats.FireMode == EWeaponFireMode::Hitscan)
+	if (Stats.FireMode == EGoombanicsFireMode::Hitscan)
 	{
 		FireHitscan();
 	}
